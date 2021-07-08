@@ -8,30 +8,26 @@ dotenv.config();
 //Add a User
 export async function signUp(req, res) {
   try {
+    // let userExists = await Users.findAll({where: {Email: req.body.Email}});
+    // if (userExists) {
+    //     res.status(500).json({
+    //     success: false,
+    //     message: "Oopss! User Email already exists..."
+    //     });
+    // } else {
     bcrypt.hash(req.body.password, 10).then(async (hash) => {
       let userObj = {
         email_address: req.body.email_address,
         password: hash,
+
         user_name: req.body.user_name,
       };
-
-      let user = await User.create(userObj);
+      let user = await Users.create(userObj);
       if (user) {
-        let authToken = jwt.sign(
-          { email_address: user.email_address, user_id: user.user_id },
-          process.env.AUTH_KEY,
-          { expiresIn: "1h" }
-        );
-        return res.status(200).json({
-          status: true,
+        res.status(200).json({
+          success: true,
           message: "User created successfully",
-          user: {
-            user_name: user.user_name,
-            email_address: user.email_address,
-            user_id: user.user_id,
-          },
-          token: authToken,
-          expiresIn: 3600,
+          data: user,
         });
       } else {
         res.status(200).json({
