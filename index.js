@@ -15,7 +15,7 @@ app.get("/", cors(), (req, res) => {
 });
 app.use(
   cors({
-    origin: "http://127.0.0.1:5500",
+    origin: "https://knack-front.herokuapp.com",  
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false,
     optionsSuccessStatus: 204,
