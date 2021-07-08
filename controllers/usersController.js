@@ -22,7 +22,7 @@ export async function signUp(req, res) {
 
         user_name: req.body.user_name,
       };
-      let user = await Users.create(userObj);
+      let user = await User.create(userObj);
       if (user) {
         res.status(200).json({
           success: true,
