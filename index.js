@@ -10,12 +10,12 @@ dotenv.config();
 
 const port = process.env.PORT || 3001;
 
-app.get("/with-cors", cors(), (req, res) => {
-  res.json({msg: "Welcome Knack dashboard API"});
+app.get("/", cors(), (req, res) => {
+  res.send('Hello World');
 });
 app.use(
   cors({
-    origin: "*",
+    origin: "http://127.0.0.1:5500",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false,
     optionsSuccessStatus: 204,
